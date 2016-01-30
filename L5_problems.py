@@ -238,14 +238,20 @@ def isIn(char, aStr):
     else:
         return isIn(char, aStr[midIndex + 1:])
 
+my_ascii = string.ascii_letters[::-1]
 print('isIn')
-print(isIn('H', sorted(string.ascii_letters)))
-print(isIn('Z', sorted(string.ascii_letters[:51])))
+print(isIn('H', my_ascii))
+print(isIn('Z', my_ascii[:51]))
 print(isIn('a', ''))
 
 
 def semordnilapWrapper(str1, str2):
     # A single-length string cannot be semordnilap
+    """
+    Compares 2 strings if they are palindromes
+    :type str1: string - 1st input string
+    :type str2: string - 2nd input string
+    """
     if len(str1) == 1 or len(str2) == 1:
         return False
 
@@ -263,8 +269,9 @@ def semordnilap(str1, str2):
 
     returns: True if str1 and str2 are semordnilap;
              False otherwise.
-             :param str2:
+             :rtype: Boolean - is palindrome?
              :param str1:
+             :param str2:
     """
     # Your code here
 
@@ -276,6 +283,11 @@ def semordnilap(str1, str2):
     if len(str1) != len(str2):
         return False
 
+    # One character left means str1 and str2 are palindromes since they the
+    # original single-character case was excluded.
+    if len(str1) == 1 and len(str2) == 1:
+        return True
+
     Test = (str1[0] == str2[len(str2)-1])
     if Test and semordnilap(str1[1:], str2[:-1]):
         return True
@@ -284,3 +296,23 @@ def semordnilap(str1, str2):
 
 print('semordnilap')
 print(semordnilapWrapper('nametag', 'gateman'))
+print(semordnilapWrapper('blues', 'hockey'))
+print(semordnilapWrapper('desserts', 'stressed'))
+
+
+def fibMetered(x):
+    global numCalls
+    numCalls += 1
+    if x == 0 or x == 1:
+        return 1
+    else:
+        return fibMetered(x-1) + fibMetered(x-2)
+
+def testFib(n):
+    global numCalls
+    numCalls = 0
+    for i in range(n+1):
+        print('fib of ' + str(i) + ' = ' + str(fibMetered(i)))
+        print ('fib called ' + str(numCalls) + ' times')
+
+testFib(10)
