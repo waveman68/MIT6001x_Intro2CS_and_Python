@@ -14,4 +14,3 @@ def polysum(n, s):
     area = n * s**2 / (4 * math.tan(math.pi / n))   # geometry formula
     result = round(perimeterSquared + area, 4)      # round to 4 digits
     return result
-

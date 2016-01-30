@@ -19,3 +19,36 @@ def oddTuples(aTup):
 
 print(oddTuples(('I', 'am', 'a', 'test', 'tuple')))
 print(oddTuples(()))
+
+listA = [1, 4, 3, 0]
+listA.insert(0, 100)
+listA.remove(3)
+listA.index(1)
+
+
+def absolute(a):
+    return abs(a)
+
+def plus_one(a):
+    return a + 1
+
+def square(a):
+    return a**2
+
+testList = [1, -4, 8, -9]
+
+
+def applyToEach(L, f):
+    for i in range(len(L)):
+        L[i] = f(L[i])
+
+applyToEach(testList, absolute)
+print(testList)
+
+testList = [1, -4, 8, -9]
+applyToEach(testList, plus_one)
+print(testList)
+
+testList = [1, -4, 8, -9]
+applyToEach(testList, square)
+print(testList)
