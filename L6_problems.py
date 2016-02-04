@@ -33,7 +33,7 @@ def plus_one(a):
     return a + 1
 
 def square(a):
-    return a**2
+    return a*a
 
 testList = [1, -4, 8, -9]
 
@@ -63,10 +63,6 @@ def applyEachTo(L, x):
     return result
 
 
-def square(a):
-    return a*a
-
-
 def halve(a):
     return a/2
 
@@ -74,5 +70,57 @@ def halve(a):
 def inc(a):
     return a+1
 
-print(applyToEach([inc, square, halve, abs], -3))
+print(applyEachTo([inc, square, halve, abs], -3))
 print(applyEachTo([inc, square, halve, abs], 3.0))
+
+
+def howMany(aDict):
+    '''
+    aDict: A dictionary, where all the values are lists.
+
+    returns: int, how many values are in the dictionary.
+    '''
+    # Your Code Here
+    animal_count = 0
+    for dict_key in aDict:
+        animal_count += len(aDict[dict_key])
+    return animal_count
+
+animals = { 'a': ['aardvark'], 'b': ['baboon'], 'c': ['coati']}
+
+animals['d'] = ['donkey']
+animals['d'].append('dog')
+animals['d'].append('dingo')
+
+print('howMany:')
+print('=============')
+print(howMany(animals))
+
+
+def biggest(aDict):
+    '''
+    aDict: A dictionary, where all the values are lists.
+
+    returns: The key with the largest number of values associated with it
+    '''
+    # Your Code Here
+    return_str = ''                 # initialize biggest dict_key for return
+
+    if len(aDict) == 0:
+        return None
+
+    for dict_key in aDict:
+        if aDict.has_key(return_str):     # compare entry lengths
+            if len(aDict[dict_key]) >= len(aDict[return_str]):
+                return_str = dict_key
+        elif return_str == '':              # set first item for comparison
+            return_str = dict_key
+
+    return return_str
+
+print('biggest:')
+print('=============')
+
+print(biggest(animals))
+print(biggest({}))
+print(biggest({'S': []}))
