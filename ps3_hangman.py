@@ -94,15 +94,12 @@ def getGuessedWord(secretWord, lettersGuessed):
     return guessed_word
 
 
-print(getGuessedWord('test', 'tst'))
-print(getGuessedWord('test', 'test'))
-
-
 def getAvailableLetters(lettersGuessed):
     '''
     lettersGuessed: list, what letters have been guessed so far
     returns: string, comprised of letters that represents what letters have not
       yet been guessed.
+      :rtype: str
       :param lettersGuessed: user guesses
     '''
     # FILL IN YOUR CODE HERE...
@@ -110,9 +107,6 @@ def getAvailableLetters(lettersGuessed):
     for letter in lettersGuessed:
         available_letters = string.replace(available_letters, letter, '')
     return available_letters
-
-
-print(getAvailableLetters('test'))
 
 
 def hangman(secretWord):
@@ -138,9 +132,40 @@ def hangman(secretWord):
     :param secretWord: computer-generated word
     """
     # FILL IN YOUR CODE HERE...
+    number_guesses_left = 8                          # initialize
+    letters_guessed = ''
+
     print ('Welcome to the game, Hangman!')
     letters_long = len(secretWord)
     print ('I am thinking of a word that is %d letters long.' % letters_long)
+    print('-------------')
+
+    while number_guesses_left > 0:
+        print('You have %d guesses left.' % number_guesses_left)
+        available_letters = getAvailableLetters(letters_guessed)
+        print('Available letters: ' + available_letters)
+
+        guess = str(raw_input('Please guess a letter: '))
+        already_guessed = letters_guessed.find(guess) != -1
+        letters_guessed += guess
+        guess_index = secretWord.find(guess)
+        feedback = getGuessedWord(secretWord, letters_guessed)
+        if already_guessed == 1:
+            print('Oops! You''ve already guessed that letter: ' + feedback)
+        elif guess_index != -1:
+            print('Good guess: ' + feedback)
+        elif guess_index == -1:
+            print('Oops! That letter is not in my word: ' + feedback)
+            number_guesses_left -= 1
+
+        if isWordGuessed(secretWord, letters_guessed):
+            print('-------------')
+            print('Congratulations, you won!')
+            return
+        if number_guesses_left == 0:
+            print('-------------')
+            print('Sorry, you ran out of guesses. The word was %s.' % secretWord)
+            return
 
 
 # When you've completed your hangman function, uncomment these two lines
