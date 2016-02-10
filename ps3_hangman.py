@@ -12,7 +12,7 @@
 import random
 import string
 
-WORDLIST_FILENAME = "words.txt"
+WORDLIST_FILENAME = "words_ps3.txt"
 
 
 def loadWords():
