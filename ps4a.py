@@ -39,6 +39,20 @@ def loadWords():
     for line in inFile:
         wordList.append(line.strip().lower())
     print "  ", len(wordList), "words loaded."
+
+    # sort according to word length reduce overhead searching the list
+    wordList = sorted(wordList, key=len)
+
+    bigger_word = ''
+    for word in wordList:
+        if len(word) > HAND_SIZE:
+            bigger_word = word      # the first word bigger than the hand size
+            break
+        pass
+    assert isinstance(bigger_word, str)
+
+    index = wordList.index(bigger_word)
+    wordList = wordList[:index]
     return wordList
 
 
@@ -325,7 +339,6 @@ def playGame(wordList):
  
     2) When done playing the hand, repeat from step 1    
     """
-    # TODO ... <-- Remove this comment when you code this function
     user_choice = ''            # initialize
     hand = dict()
     while user_choice != 'e':
