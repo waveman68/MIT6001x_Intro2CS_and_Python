@@ -239,22 +239,22 @@ class CiphertextMessage(Message):
         Returns: a tuple of the best shift value used to decrypt the message
         and the decrypted message text using that shift value
         """
-        list_num_word = []          # initialize list of words per shift
-        l_decrypted = []            # list of various decryption
+        list_num_word = []  # initialize list of words per shift
+        l_decrypted = []  # list of various decryption
 
         for i in range(1, 27):
-            n = 0                   # reset n for each iteration
+            n = 0  # reset n for each iteration
             decryption = self.apply_shift(26 - i)
             l_decrypted.append(decryption)
             l_decryption = decryption.split()
             for word in l_decryption:
                 if is_word(self.valid_words, word):
                     n += 1
-            list_num_word.append(n)     # store number of words
+            list_num_word.append(n)  # store number of words
         else:
             best = max(list_num_word)
             idx = list_num_word.index(best)
-        return_tuple = (25-idx, l_decrypted[idx])
+        return_tuple = (25 - idx, l_decrypted[idx])
         return return_tuple
 
 
